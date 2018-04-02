@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Javascript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="setTimeout() &amp;#x548C; setInterval() &amp;#x90FD;&amp;#x662F; window &amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002; &amp;#x8D85;&amp;#x65F6;&amp;#x8C03;&amp;#x7528;&amp;#xFF08;setTimeout&amp;#xFF09;&amp;#x987E;&amp;#x540D;&amp;#x601D;&amp;#x4E49;&amp;">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超时调用和间隔调用">
+<meta property="og:url" content="http://yoursite.com/2016/03/16/setTimeout-setInterval/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="setTimeout() &amp;#x548C; setInterval() &amp;#x90FD;&amp;#x662F; window &amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002; &amp;#x8D85;&amp;#x65F6;&amp;#x8C03;&amp;#x7528;&amp;#xFF08;setTimeout&amp;#xFF09;&amp;#x987E;&amp;#x540D;&amp;#x601D;&amp;#x4E49;&amp;">
+<meta property="og:updated_time" content="2016-03-27T02:06:16.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超时调用和间隔调用">
+<meta name="twitter:description" content="setTimeout() &amp;#x548C; setInterval() &amp;#x90FD;&amp;#x662F; window &amp;#x5BF9;&amp;#x8C61;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002; &amp;#x8D85;&amp;#x65F6;&amp;#x8C03;&amp;#x7528;&amp;#xFF08;setTimeout&amp;#xFF09;&amp;#x987E;&amp;#x540D;&amp;#x601D;&amp;#x4E49;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/03/16/setTimeout-setInterval/"/>
+
+
+
+
+
+  <title>超时调用和间隔调用 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/16/setTimeout-setInterval/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">超时调用和间隔调用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-16T01:12:55+08:00">
+                2016-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>setTimeout() &#x548C; setInterval() &#x90FD;&#x662F; window &#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<h1 id="&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF08;setTimeout&#xFF09;"><a href="#&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF08;setTimeout&#xFF09;" class="headerlink" title="&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF08;setTimeout&#xFF09;"></a>&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF08;setTimeout&#xFF09;</h1><p>&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;setTimeout()&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x503C;&#xFF0C;&#x4EE5;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x8D85;&#x65F6;&#x503C;&#xFF09;&#x8FC7;&#x540E;&#x7684;&#x6765;&#x6267;&#x884C;&#x67D0;&#x6BB5;&#x4EE3;&#x7801;&#x3002;</p>
+<p>setTimeout()&#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>&#x5305;&#x542B; JavaScript &#x4EE3;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x8DDF;eval()&#x89E3;&#x6790;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x4E00;&#x6837;&#xFF09; / &#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF08;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x4F53;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x540D;&#xFF09;</li>
+<li>&#x8D85;&#x65F6;&#x503C;&#xFF08;&#x5355;&#x4F4D;&#xFF1A;&#x6BEB;&#x79D2;&#xFF09;</li>
+</ul>
+<p>&#x65B9;&#x6CD5;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;ID&#xFF0C;&#x4F5C;&#x4E3A;&#x8BA1;&#x5212;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x7B26;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <strong>clearTimeout(ID)</strong>&#x65B9;&#x6CD5;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x8FC7;&#x53BB;&#x4E4B;&#x524D;&#x6765;&#x53D6;&#x6D88;&#x8D85;&#x65F6;&#x8C03;&#x7528;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var timer = setTimeout(function(){</div><div class="line">	console.log(&quot;hello&quot;);</div><div class="line">}, 1000);</div><div class="line">clearTimeout(timer);</div></pre></td></tr></table></figure>
+<p>&#x5176;&#x4E2D;&#xFF0C;&#x4E00;&#x822C;&#x4EE5;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8BDD;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6027;&#x80FD;&#x635F;&#x5931;&#xFF0C;&#x6545;&#x4E0D;&#x63A8;&#x8350;&#x4F20;&#x9012;&#x5B57;&#x7B26;&#x4E32;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5C3D;&#x7BA1;&#x8BBE;&#x7F6E;&#x4E86;&#x8D85;&#x65F6;&#x503C;&#xFF0C;&#x4F46;&#x662F;&#x7ECF;&#x8FC7;&#x8BE5;&#x65F6;&#x95F4;&#x540E;&#xFF0C;&#x4E5F;&#x4E0D;&#x4E00;&#x5B9A;&#x4F1A;&#x6267;&#x884C;&#x6307;&#x5B9A;&#x7684;&#x4EE3;&#x7801;&#x6BB5;&#x3002;&#x56E0;&#x4E3A; JavaScript &#x662F;&#x4E00;&#x4E2A;<strong>&#x5355;&#x7EBF;&#x7A0B;</strong>&#x7684;&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x53EA;&#x80FD;&#x6267;&#x884C;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#x3002;&#x4E3A;&#x4E86;&#x63A7;&#x5236;&#x8981;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;&#xFF0C;JS &#x6709;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4F1A;<strong>&#x6309;&#x7167;&#x5B83;&#x4EEC;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x6267;&#x884C;</strong>&#x3002;setTimeout()&#x65B9;&#x6CD5;&#x53EA;&#x662F;<strong>&#x5EF6;&#x8FDF;&#x4E86;&#x5C06;&#x67D0;&#x4E2A;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x7684;&#x65F6;&#x95F4;</strong>&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5F53;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x6DFB;&#x52A0;&#x7684;&#x4EE3;&#x7801;&#x4FBF;&#x4F1A;&#x7ACB;&#x523B;&#x6267;&#x884C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5219;&#x9700;&#x7B49;&#x961F;&#x5217;&#x524D;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5168;&#x90E8;&#x6267;&#x884C;&#x5B8C;&#x4E86;&#x4EE5;&#x540E;&#x518D;&#x6267;&#x884C;&#x3002;</p>
+<h1 id="&#x95F4;&#x6B47;&#x8C03;&#x7528;&#xFF08;setInterval&#xFF09;"><a href="#&#x95F4;&#x6B47;&#x8C03;&#x7528;&#xFF08;setInterval&#xFF09;" class="headerlink" title="&#x95F4;&#x6B47;&#x8C03;&#x7528;&#xFF08;setInterval&#xFF09;"></a>&#x95F4;&#x6B47;&#x8C03;&#x7528;&#xFF08;setInterval&#xFF09;</h1><p>setInterval()&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;&#x8BBE;&#x7F6E;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x6765;&#x91CD;&#x590D;&#x6267;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x76F4;&#x5230;&#x95F4;&#x6B47;&#x8C03;&#x7528;&#x88AB;&#x53D6;&#x6D88;&#x6216;&#x8005;&#x662F;&#x9875;&#x9762;&#x88AB;&#x5378;&#x8F7D;&#x624D;&#x505C;&#x6B62;&#x3002;<br>&#x63A5;&#x6536;&#x7684;&#x53C2;&#x6570;&#x548C; setTimeout()&#x76F8;&#x540C;&#x3002;<br>&#x540C;&#x6837;&#xFF0C;&#x4E5F;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; ID&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; clearInterval(ID)&#x6765;&#x53D6;&#x6D88;&#x3002;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var num = 0;</div><div class="line">function increaseNum(){</div><div class="line">	num++;</div><div class="line"></div><div class="line">	// &#x5F53; num &#x7B49;&#x4E8E; 10 &#x65F6;&#xFF0C;&#x53D6;&#x6D88;&#x540E;&#x7EED;&#x7684;&#x8C03;&#x7528;</div><div class="line">	if(num === 10) {</div><div class="line">		clearInterval(timer);</div><div class="line">		alert(&quot;DONE~&quot;);</div><div class="line">	}</div><div class="line"></div><div class="line">};</div><div class="line">var timer = setInterval(increaseNum, 1000);</div></pre></td></tr></table></figure></p>
+<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x4F7F;&#x7528; setTimeout &#x6765;&#x6A21;&#x62DF; setInterval &#x662F;&#x4E00;&#x79CD;&#x6700;&#x4F73;&#x6A21;&#x5F0F;&#x3002;&#x56E0;&#x4E3A;&#x540E;&#x4E00;&#x4E2A;&#x95F4;&#x6B47;&#x8C03;&#x7528;&#x53EF;&#x80FD;&#x4F1A;&#x5728;&#x524D;&#x4E00;&#x4E2A;&#x95F4;&#x6B47;&#x8C03;&#x7528;&#x7ED3;&#x675F;&#x4E4B;&#x524D;&#x542F;&#x52A8;&#x3002;&#x800C;&#x4F7F;&#x7528;&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF0C;&#x5219;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x3002;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var num = 0;</div><div class="line">function increaseNum(){</div><div class="line">	num++;</div><div class="line"></div><div class="line">	if(num &lt; 10) {</div><div class="line">		setTimeout(increaseNum, 1000);</div><div class="line">	} else {</div><div class="line">		alert(&quot;DONE~&quot;);</div><div class="line">	}</div><div class="line">}</div><div class="line">setTimeout(increaseNum, 1000);</div><div class="line"></div><div class="line">// &#x4ECE;&#x4E2D;&#x53EF;&#x770B;&#x51FA;&#xFF0C;&#x4F7F;&#x7528;&#x8D85;&#x65F6;&#x8C03;&#x7528;&#xFF0C;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x8DDF;&#x8E2A;&#x5176; ID&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x6B21;&#x6267;&#x884C;&#x5B8C;&#x4EE3;&#x7801;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x518D;&#x8BBE;&#x7F6E;&#x4E00;&#x6B21;&#x8D85;&#x65F6;&#x8C03;&#x7528;&#x7684;&#x8BDD;&#xFF0C;&#x8C03;&#x7528;&#x5C31;&#x81EA;&#x52A8;&#x505C;&#x6B62;</div></pre></td></tr></table></figure></p>
+<h1 id="To-be-continued&#x2026;"><a href="#To-be-continued&#x2026;" class="headerlink" title="(To be continued&#x2026;)"></a>(To be continued&#x2026;)</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/13/type-examine/" rel="next" title="JavaScript数据类型的判定">
+                <i class="fa fa-chevron-left"></i> JavaScript数据类型的判定
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/16/XHR-AJAX/" rel="prev" title="XMLHttpRequest 对象以及 AJAX 技术">
+                XMLHttpRequest 对象以及 AJAX 技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#超时调用（setTimeout）"><span class="nav-number">1.</span> <span class="nav-text">超时调用（setTimeout）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#间歇调用（setInterval）"><span class="nav-number">2.</span> <span class="nav-text">间歇调用（setInterval）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-continued…"><span class="nav-number">3.</span> <span class="nav-text">(To be continued…)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

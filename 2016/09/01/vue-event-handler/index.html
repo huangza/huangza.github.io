@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Vue.js,MVVM," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;#x65B9;&amp;#x6CD5;&amp;#x5904;&amp;#x7406;&amp;#x5668;v-on &amp;#x6307;&amp;#x4EE4;&amp;#x76D1;&amp;#x542C; DOM &amp;#x4E8B;&amp;#x4EF6;&amp;#xFF1A;&amp;lt;div id=&amp;quot;example&amp;quot;&amp;gt;&amp;lt;button v-on:click=&amp;quot;greet&amp;quot;&amp;gt; Greet &amp;lt;/butto">
+<meta name="keywords" content="JavaScript,Vue.js,MVVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue学习笔记（八） - 方法与事件处理器">
+<meta property="og:url" content="http://yoursite.com/2016/09/01/vue-event-handler/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="&amp;#x65B9;&amp;#x6CD5;&amp;#x5904;&amp;#x7406;&amp;#x5668;v-on &amp;#x6307;&amp;#x4EE4;&amp;#x76D1;&amp;#x542C; DOM &amp;#x4E8B;&amp;#x4EF6;&amp;#xFF1A;&amp;lt;div id=&amp;quot;example&amp;quot;&amp;gt;&amp;lt;button v-on:click=&amp;quot;greet&amp;quot;&amp;gt; Greet &amp;lt;/butto">
+<meta property="og:updated_time" content="2016-09-01T15:58:15.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue学习笔记（八） - 方法与事件处理器">
+<meta name="twitter:description" content="&amp;#x65B9;&amp;#x6CD5;&amp;#x5904;&amp;#x7406;&amp;#x5668;v-on &amp;#x6307;&amp;#x4EE4;&amp;#x76D1;&amp;#x542C; DOM &amp;#x4E8B;&amp;#x4EF6;&amp;#xFF1A;&amp;lt;div id=&amp;quot;example&amp;quot;&amp;gt;&amp;lt;button v-on:click=&amp;quot;greet&amp;quot;&amp;gt; Greet &amp;lt;/butto">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/01/vue-event-handler/"/>
+
+
+
+
+
+  <title>Vue学习笔记（八） - 方法与事件处理器 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/vue-event-handler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue学习笔记（八） - 方法与事件处理器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-01T23:50:47+08:00">
+                2016-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x65B9;&#x6CD5;&#x5904;&#x7406;&#x5668;"><a href="#&#x65B9;&#x6CD5;&#x5904;&#x7406;&#x5668;" class="headerlink" title="&#x65B9;&#x6CD5;&#x5904;&#x7406;&#x5668;"></a>&#x65B9;&#x6CD5;&#x5904;&#x7406;&#x5668;</h1><p><strong>v-on</strong> &#x6307;&#x4EE4;&#x76D1;&#x542C; DOM &#x4E8B;&#x4EF6;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;div id=&quot;example&quot;&gt;</div><div class="line">&lt;button v-on:click=&quot;greet&quot;&gt; Greet &lt;/button&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var vm = new Vue({</div><div class="line">	el: &apos;#example&apos;,</div><div class="line">	data:{</div><div class="line">		name: &apos;Vue.js&apos;</div><div class="line">	},</div><div class="line">	methods: {</div><div class="line">		greet: function(event){</div><div class="line">			alert(&apos;Hello &apos; + this.name + &apos;!&apos;);</div><div class="line">			alert(event.target.tagName);</div><div class="line">		}</div><div class="line">	}</div><div class="line">})</div><div class="line"></div><div class="line">vm.greet()	// &#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5728; JavaScript &#x4EE3;&#x7801;&#x8C03;&#x7528;</div></pre></td></tr></table></figure>
+<h1 id="&#x5185;&#x8054;&#x8BED;&#x53E5;&#x5904;&#x7406;&#x5668;"><a href="#&#x5185;&#x8054;&#x8BED;&#x53E5;&#x5904;&#x7406;&#x5668;" class="headerlink" title="&#x5185;&#x8054;&#x8BED;&#x53E5;&#x5904;&#x7406;&#x5668;"></a>&#x5185;&#x8054;&#x8BED;&#x53E5;&#x5904;&#x7406;&#x5668;</h1><p>&#x5373;&#x7C7B;&#x4F3C;&#x4E00;&#x4E2A;&#x5185;&#x8054;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x4E3A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;<strong>&#x4F20;&#x5165;&#x53C2;&#x6570;</strong>&#xFF0C;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;button v-on:click=&quot;say(&apos;&#x54E6;&#x55E8;&#x54DF;&apos;)&quot;&gt; say something &lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x7ED9;&#x5176;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x53D8;&#x91CF; <strong>$event</strong>&#xFF0C;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x539F;&#x751F;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;button v-on:click=&quot;say(&apos;&#x54E6;&#x55E8;&#x54DF;&apos;, $event)&quot;&gt; say something &lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;"></a>&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;</h1><p>&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x540E;&#x7F00;&#xFF1A;<br>&#x963B;&#x6B62;&#x4E8B;&#x4EF6;&#x5192;&#x6CE1; - <strong>.prevent</strong><br>&#x53D6;&#x6D88;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A; - <strong>.stop</strong><br>e.g.<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;a v-on:click.stop.prevent=&quot;doSth&quot;&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>Vue 1.0.16+ &#x65B0;&#x589E;&#x4E86;&#x4E24;&#x4E2A;<br>&#x6DFB;&#x52A0;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x5668;&#x65F6;&#x4F7F;&#x7528; capture &#x6A21;&#x5F0F;     -    <strong>.capture</strong><br>&#x53EA;&#x5F53;&#x4E8B;&#x4EF6;&#x5728;&#x8BE5;&#x5143;&#x7D20;&#x672C;&#x8EAB;&#xFF08;&#x975E;&#x5B50;&#x5143;&#x7D20;&#xFF09;&#x89E6;&#x53D1;    -    <strong>.self</strong></p>
+<h1 id="&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;"></a>&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;</h1><p>&#x5F53;&#x76D1;&#x542C;&#x7684;&#x4E8B;&#x4EF6;&#x662F; keyup &#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x540E;&#x9762;&#x52A0;&#x4E0A;&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;&#x3002;<br>&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;&#x53EF;&#x4EE5;&#x662F; keyCode&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x6309;&#x952E;&#x522B;&#x540D;&#x3002;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input v-on:keyup.13=&quot;submit&quot;/&gt;</div><div class="line">&lt;input v-on:keyup.enter=&quot;submit&quot;/&gt;</div></pre></td></tr></table></figure></p>
+<p>Vue.js &#x7684;&#x6309;&#x952E;&#x522B;&#x540D;&#xFF1A;</p>
+<ul>
+<li>enter</li>
+<li>tab</li>
+<li>delete</li>
+<li>esc</li>
+<li>space</li>
+<li>up</li>
+<li>down</li>
+<li>left</li>
+<li>right</li>
+</ul>
+<p>P.s.<br><strong>1.0.8+</strong>&#xFF1A;    &#x652F;&#x6301;&#x5355;&#x5B57;&#x6BCD;&#x6309;&#x952E;&#x522B;&#x540D;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input v-on:keyup.a=&quot;submit&quot;/&gt;</div><div class="line">&lt;!-- &#x6309;&#x201C;A&#x201D;&#x201C;a&#x201D;&#x90FD;&#x4F1A;&#x89E6;&#x53D1; --&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>1.0.17+</strong>&#xFF1A;    &#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x6309;&#x952E;&#x522B;&#x540D;<br>&#x4E3A; F1 &#x952E;&#x8BBE;&#x7F6E;&#x522B;&#x540D;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Vue.directive(&apos;on&apos;).keyCodes.f1 = 112</div><div class="line">==&gt; &lt;input v-on:keyup.f1=&quot;doSth&quot;&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="&#x4F7F;&#x7528;-v-on-&#x7684;&#x597D;&#x5904;"><a href="#&#x4F7F;&#x7528;-v-on-&#x7684;&#x597D;&#x5904;" class="headerlink" title="&#x4F7F;&#x7528; v-on &#x7684;&#x597D;&#x5904;"></a>&#x4F7F;&#x7528; v-on &#x7684;&#x597D;&#x5904;</h1><ol>
+<li>&#x6839;&#x636E;&#x6A21;&#x7248;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5B9A;&#x4F4D;&#x5728; JavaScript &#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;</li>
+<li>&#x65E0;&#x987B;&#x5728; JavaScript &#x624B;&#x52A8;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;</li>
+<li>ViewModel &#x88AB;&#x9500;&#x6BC1;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x88AB;&#x5220;&#x9664;</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          
+            <a href="/tags/MVVM/" rel="tag"># MVVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/31/vue-list-paint/" rel="next" title="Vue学习笔记（七） - 列表渲染">
+                <i class="fa fa-chevron-left"></i> Vue学习笔记（七） - 列表渲染
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/vue-form/" rel="prev" title="Vue学习笔记（九） - 表单控件绑定">
+                Vue学习笔记（九） - 表单控件绑定 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法处理器"><span class="nav-number">1.</span> <span class="nav-text">方法处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内联语句处理器"><span class="nav-number">2.</span> <span class="nav-text">内联语句处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件修饰符"><span class="nav-number">3.</span> <span class="nav-text">事件修饰符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按键修饰符"><span class="nav-number">4.</span> <span class="nav-text">按键修饰符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-v-on-的好处"><span class="nav-number">5.</span> <span class="nav-text">使用 v-on 的好处</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

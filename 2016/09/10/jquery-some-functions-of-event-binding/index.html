@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,jQuery," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;#x80CC;(chui)&amp;#x666F;(shui)&amp;#x7528;&amp;#x4E86;&amp;#x90A3;&amp;#x4E48;&amp;#x4E45; jQ&amp;#xFF0C;&amp;#x4E5F;&amp;#x7528;&amp;#x8FC7;&amp;#x4ED6;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x51E0;&amp;#x79CD;&amp;#x4E8B;&amp;#x4EF6;&amp;#x7ED1;&amp;#x5B9A;&amp;#x7684;&amp;#x65B9;&amp;">
+<meta name="keywords" content="JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 jQuery 几种事件绑定的方式">
+<meta property="og:url" content="http://yoursite.com/2016/09/10/jquery-some-functions-of-event-binding/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="&amp;#x80CC;(chui)&amp;#x666F;(shui)&amp;#x7528;&amp;#x4E86;&amp;#x90A3;&amp;#x4E48;&amp;#x4E45; jQ&amp;#xFF0C;&amp;#x4E5F;&amp;#x7528;&amp;#x8FC7;&amp;#x4ED6;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x51E0;&amp;#x79CD;&amp;#x4E8B;&amp;#x4EF6;&amp;#x7ED1;&amp;#x5B9A;&amp;#x7684;&amp;#x65B9;&amp;">
+<meta property="og:updated_time" content="2016-09-10T14:03:26.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 jQuery 几种事件绑定的方式">
+<meta name="twitter:description" content="&amp;#x80CC;(chui)&amp;#x666F;(shui)&amp;#x7528;&amp;#x4E86;&amp;#x90A3;&amp;#x4E48;&amp;#x4E45; jQ&amp;#xFF0C;&amp;#x4E5F;&amp;#x7528;&amp;#x8FC7;&amp;#x4ED6;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x51E0;&amp;#x79CD;&amp;#x4E8B;&amp;#x4EF6;&amp;#x7ED1;&amp;#x5B9A;&amp;#x7684;&amp;#x65B9;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/10/jquery-some-functions-of-event-binding/"/>
+
+
+
+
+
+  <title>关于 jQuery 几种事件绑定的方式 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/10/jquery-some-functions-of-event-binding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于 jQuery 几种事件绑定的方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-10T21:57:43+08:00">
+                2016-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x80CC;-chui-&#x666F;-shui"><a href="#&#x80CC;-chui-&#x666F;-shui" class="headerlink" title="&#x80CC;(chui)&#x666F;(shui)"></a>&#x80CC;(chui)&#x666F;(shui)</h1><p>&#x7528;&#x4E86;&#x90A3;&#x4E48;&#x4E45; jQ&#xFF0C;&#x4E5F;&#x7528;&#x8FC7;&#x4ED6;&#x63D0;&#x4F9B;&#x7684;&#x51E0;&#x79CD;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5305;&#x62EC; bind&#x3001;live&#x3001;delegate &#x548C; on&#x3002;&#x6E2F;&#x771F;&#xFF0C;&#x4E00;&#x5F00;&#x59CB;&#x7528;&#x7684;&#x65F6;&#x5019;&#x8FD8;&#x771F;&#x6CA1;&#x6709;&#x597D;&#x597D;&#x533A;&#x5206;&#xFF0C;&#x5404;&#x79CD;&#x6DF7;&#x7528;&#x3002;&#x73B0;&#x5728;&#x4E5F;&#x8BE5;&#x85C9;&#x7531;&#x5F53;&#x524D;&#x7684;&#x7ECF;&#x9A8C;&#xFF0C;&#x5BF9;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x597D;&#x597D;&#x603B;&#x7ED3;&#x4E00;&#x4E0B;&#xFF0C;&#x52A0;&#x6DF1;&#x7406;&#x89E3;&#x3002;<br>&#xFF08;&#x540E;&#x8BB0;&#xFF1A;&#x540E;&#x9762;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#x597D;&#x50CF;&#x5E94;&#x8BE5;&#x53EB;&#x4E8B;&#x4EF6;&#x59D4;&#x6258;&#xFF0C;&#x56E0;&#x4E3A;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x5C06;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;&#x7ED1;&#x5B9A;&#x5230;&#x67D0;&#x4E2A;&#x7956;&#x5148;&#x5143;&#x7D20;&#xFF0C;&#x8BA9;&#x5176;&#x6765;&#x4EE3;&#x66FF;&#x5904;&#x7406;&#x4E8B;&#x4EF6;&#xFF0C;&#x800C;&#x5143;&#x7D20;&#x672C;&#x8EAB;&#x4E0D;&#x5904;&#x7406;&#xFF09;</p>
+<h1 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$( selector ).bind( event, handler )</div></pre></td></tr></table></figure>
+<p>bind &#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x662F;&#x5178;&#x578B;&#x7684;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x4E86;&#x3002;&#x4EE5; $(&#x2018;a&#x2019;).bind(&#x2018;click&#x2019;, handler) &#x4E3A;&#x6817;&#x5B50;&#xFF0C;bind &#x65B9;&#x6CD5;&#x662F;&#x901A;&#x8FC7;&#x904D;&#x5386;&#x627E;&#x51FA;&#x6240;&#x6709;&#x6EE1;&#x8DB3;<br>&#x9009;&#x62E9;&#x5668;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x6765;&#x7ED9;&#x5B83;&#x4EEC;&#x4E00;&#x4E00;&#x7ED1;&#x5B9A;&#x3002;</p>
+<h1 id="live"><a href="#live" class="headerlink" title="live"></a>live</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$( selector [,context]).live( event, handler )</div></pre></td></tr></table></figure>
+<p>live &#x65B9;&#x6CD5;&#xFF0C;&#x662F;&#x5C06;&#x4E8B;&#x4EF6;&#x59D4;&#x6258;&#x5230; document &#x5143;&#x7D20;&#xFF0C;&#x5373;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x5668; handler &#x7ED1;&#x5B9A;&#x5230; $(document) &#x5143;&#x7D20;&#x4E0A;&#x3002;&#x5F53;&#x67D0;&#x4E2A;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#xFF0C;live &#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x548C;&#x9009;&#x62E9;&#x5668;&#x5BF9;&#x5177;&#x4F53;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5339;&#x914D;&#xFF0C;&#x7136;&#x540E;&#x5904;&#x7406;&#x4E8B;&#x4EF6;&#x3002;<br>&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x624B;&#x52A8;&#x8BBE;&#x7F6E;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4E0D;&#x7528;&#x7ED1;&#x5B9A;&#x5230; $(document)&#xFF0C;&#x5982;&#xFF1A;$( &#x2018;li&#x2019;,$(&#x2018;#container&#x2019;)[0] ).live(&#x2018;click&#x2019;,function(event){});<br>&#x4F7F;&#x7528; live &#x65B9;&#x6CD5;&#x7ED1;&#x5B9A;&#x5230; document &#x65F6;&#x6709;&#x4E2A;&#x7F3A;&#x70B9;&#xFF0C;&#x5C31;&#x662F;&#x4E2D;&#x95F4;&#x5982;&#x679C;&#x9694;&#x7740;&#x8F83;&#x591A;&#x5C42;&#x5143;&#x7D20;&#x7684;&#x8BDD;&#xFF0C;&#x5728;&#x5192;&#x6CE1;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x5F71;&#x54CD;&#x6027;&#x80FD;&#x3002;<br>&#xFF08;&#x4E0D;&#x8FC7;&#xFF0C;&#x4ECE; v1.9+ &#x5F00;&#x59CB;&#xFF0C;&#x5C31;&#x4E0D;&#x518D;&#x652F;&#x6301;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E86;&#xFF09;</p>
+<h1 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$( parent-selector ).delegate( selector, event, handler )</div></pre></td></tr></table></figure>
+<p>delegate &#x65B9;&#x6CD5;&#xFF0C;&#x662F;&#x901A;&#x8FC7;&#x5C06; handler &#x76F4;&#x63A5;&#x7ED1;&#x5B9A;&#x5230;&#x67D0;&#x4E2A;&#x7956;&#x7236;&#x5143;&#x7D20;&#xFF0C;&#x5728;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x627E;&#x5230;&#x7B26;&#x5408;&#x53C2;&#x6570;&#x4E2D;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x7684;&#x5B50;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<h1 id="bind-&#x548C;-live-delegate-&#x7684;&#x9009;&#x62E9;"><a href="#bind-&#x548C;-live-delegate-&#x7684;&#x9009;&#x62E9;" class="headerlink" title="bind &#x548C; live/delegate &#x7684;&#x9009;&#x62E9;"></a>bind &#x548C; live/delegate &#x7684;&#x9009;&#x62E9;</h1><p>&#x57FA;&#x4E8E;&#x8FD9;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x7279;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x5F52;&#x7EB3;&#x4E0B;&#x5217;&#x4E09;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ol>
+<li>&#x4E3A; DOM &#x4E2D;&#x7684;&#x5F88;&#x591A;&#x4E0D;&#x540C;&#x5143;&#x7D20;&#x7ED1;&#x5B9A;&#x76F8;&#x540C;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x9009;&#x540E;&#x4E24;&#x8005;&#x800C;&#x4E0D;&#x9009; bind </li>
+<li>&#x4E3A;&#x4E0D;&#x5B58;&#x5728;&#x4E8E; DOM &#x7684;&#x5143;&#x7D20;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#xFF0C;&#x540C;&#x6837;&#x4E0D;&#x9009; bind</li>
+<li>&#x7ED3;&#x6784;&#x590D;&#x6742;&#x7684; DOM &#x4E2D;&#xFF0C;&#x4F7F;&#x7528; delegate</li>
+</ol>
+<h1 id="on"><a href="#on" class="headerlink" title="on"></a>on</h1><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$([parent-]selector).on( events [, selector] [, data ], handler(event) )</div></pre></td></tr></table></figure>
+<p>v1.7+ &#x5F00;&#x59CB;&#xFF0C;&#x9010;&#x6E10;&#x53D6;&#x4EE3;&#x4E86; live&#x3001;delegate &#x548C; bind&#x3002;<br>&#x5982;&#x679C;&#x7528;&#x7279;&#x5B9A;&#x5143;&#x7D20;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#xFF0C;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$(&apos;button&apos;).on( &apos;click&apos;, function(){} )</div></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x79CD;&#x5F62;&#x5F0F;&#x548C; bind &#x7ED1;&#x5B9A;&#x65B9;&#x5F0F;&#x4E00;&#x6837;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x79CD;&#x7ED1;&#x5B9A;&#x65B9;&#x6CD5;&#x4E0D;&#x5B9C;&#x4F7F;&#x7528;&#x4E8E;&#x5C1A;&#x672A;&#x5B58;&#x5728;&#x7684;&#x5143;&#x7D20;&#x3002;<br>&#x56E0;&#x6B64;&#xFF0C;&#x6307;&#x5B9A; selector &#x53C2;&#x6570;&#xFF0C;&#x5C31;&#x662F;&#x4E8B;&#x4EF6;&#x59D4;&#x6258;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5C31;&#x662F;&#x5E38;&#x89C4;&#x7ED1;&#x5B9A;&#x3002;<br>&#x5176;&#x5B9E;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4EE5;&#x540E;&#x53EA;&#x7528; on/off &#x8FDB;&#x884C;&#x7ED1;&#x5B9A;/&#x89E3;&#x7ED1;&#x4E8B;&#x4EF6;&#x5C31;&#x591F;&#x4E86;&#x3002;</p>
+<h1 id="P-s"><a href="#P-s" class="headerlink" title="P.s."></a>P.s.</h1><p>&#x51E0;&#x79CD;&#x7ED1;&#x5B9A;&#x65B9;&#x6CD5;&#x76F8;&#x5E94;&#x7684;&#x89E3;&#x7ED1;&#x65B9;&#x6CD5;<br>bind        &#x2014;&#x2014;        unbind<br>live        &#x2014;&#x2014;        die<br>delegate    &#x2014;&#x2014;        undelegate<br>on          &#x2014;&#x2014;        off</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cnblogs.com/rabbit2012/archive/2013/03/15/2961881.html" target="_blank" rel="external">http://www.cnblogs.com/rabbit2012/archive/2013/03/15/2961881.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/08/frequently-used-events-of-form/" rel="next" title="表单常用事件">
+                <i class="fa fa-chevron-left"></i> 表单常用事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/12/notes-of-learning-stylus/" rel="prev" title="Stylus 学习笔记">
+                Stylus 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背-chui-景-shui"><span class="nav-number">1.</span> <span class="nav-text">背(chui)景(shui)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind"><span class="nav-number">2.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#live"><span class="nav-number">3.</span> <span class="nav-text">live</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delegate"><span class="nav-number">4.</span> <span class="nav-text">delegate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind-和-live-delegate-的选择"><span class="nav-number">5.</span> <span class="nav-text">bind 和 live/delegate 的选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#on"><span class="nav-number">6.</span> <span class="nav-text">on</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P-s"><span class="nav-number">7.</span> <span class="nav-text">P.s.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

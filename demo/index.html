@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义表单控件</title>
+	<style type="text/css">
+		.row{
+			width: 300px;
+			height: 100px;
+			padding: 20px;
+			border: 3px dashed #333;
+			margin: 20px auto;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="/demo/css/alphaRadio.css">
+</head>
+<body>
+	<!-- 自定义单选控件 -->
+	<div class="row">
+		<h2>模拟单选框</h2>
+		<div id="my-radio"></div>
+	</div>
+</body>
+</html>
+<script src="/demo/js/lib/jquery.js"></script>
+<script src="/demo/js/src/alphaRadio.js"></script>
+<script>
+	var options = {
+	    items: [
+	        {
+	            value: 'male',
+	            text: '男',
+	            checked: true
+	        },
+	        {
+	            value: 'female',
+	            text: '女',
+	            checked: false
+	        }
+	    ],
+	    name: 'gender'
+	};
+
+	$('#my-radio').alphaRadio(options);
+</script>

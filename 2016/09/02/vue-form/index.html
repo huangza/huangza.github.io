@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Vue.js,MVVM," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;#x8868;&amp;#x5355;&amp;#x4E2D;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F7F;&amp;#x7528; v-model &amp;#x6307;&amp;#x4EE4;&amp;#x5728;&amp;#x63A7;&amp;#x4EF6;&amp;#x4E2D;&amp;#x521B;&amp;#x5EFA;&amp;#x53CC;&amp;#x5411;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x3002; &amp;#x57F">
+<meta name="keywords" content="JavaScript,Vue.js,MVVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue学习笔记（九） - 表单控件绑定">
+<meta property="og:url" content="http://yoursite.com/2016/09/02/vue-form/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="&amp;#x8868;&amp;#x5355;&amp;#x4E2D;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F7F;&amp;#x7528; v-model &amp;#x6307;&amp;#x4EE4;&amp;#x5728;&amp;#x63A7;&amp;#x4EF6;&amp;#x4E2D;&amp;#x521B;&amp;#x5EFA;&amp;#x53CC;&amp;#x5411;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x3002; &amp;#x57F">
+<meta property="og:updated_time" content="2016-09-02T15:26:12.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue学习笔记（九） - 表单控件绑定">
+<meta name="twitter:description" content="&amp;#x8868;&amp;#x5355;&amp;#x4E2D;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F7F;&amp;#x7528; v-model &amp;#x6307;&amp;#x4EE4;&amp;#x5728;&amp;#x63A7;&amp;#x4EF6;&amp;#x4E2D;&amp;#x521B;&amp;#x5EFA;&amp;#x53CC;&amp;#x5411;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x3002; &amp;#x57F">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/02/vue-form/"/>
+
+
+
+
+
+  <title>Vue学习笔记（九） - 表单控件绑定 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/02/vue-form/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue学习笔记（九） - 表单控件绑定</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T23:09:03+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x8868;&#x5355;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; v-model &#x6307;&#x4EE4;&#x5728;&#x63A7;&#x4EF6;&#x4E2D;&#x521B;&#x5EFA;&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x3002;</p>
+<h1 id="&#x57FA;&#x7840;&#x7528;&#x6CD5;"><a href="#&#x57FA;&#x7840;&#x7528;&#x6CD5;" class="headerlink" title="&#x57FA;&#x7840;&#x7528;&#x6CD5;"></a>&#x57FA;&#x7840;&#x7528;&#x6CD5;</h1><p>&#x7ED9; v-model &#x6307;&#x4EE4;&#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;</p>
+<h2 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input type=&quot;text&quot; v-model=&quot;message&quot; placeholder=&quot;edit me&quot;&gt;</div></pre></td></tr></table></figure>
+<h2 id="Multiline-text"><a href="#Multiline-text" class="headerlink" title="Multiline text"></a>Multiline text</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;textarea v-model=&quot;message&quot; placeholder=&quot;add multiple lines&quot;&gt;&lt;/textarea&gt;</div></pre></td></tr></table></figure>
+<h2 id="Checkbox"><a href="#Checkbox" class="headerlink" title="Checkbox"></a>Checkbox</h2><p>&#x5355;&#x4E2A;&#x65F6;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x591A;&#x4E2A;&#x65F6;&#xFF0C;&#x7ED1;&#x5B9A;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input type=&quot;checkbox&quot; id=&quot;jack&quot; value=&quot;Jack&quot; v-model=&quot;checkedNames&quot;&gt;</div><div class="line">&lt;input type=&quot;checkbox&quot; id=&quot;john&quot; value=&quot;John&quot; v-model=&quot;checkedNames&quot;&gt;</div><div class="line">&lt;input type=&quot;checkbox&quot; id=&quot;mike&quot; value=&quot;Mike&quot; v-model=&quot;checkedNames&quot;&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="Radio"><a href="#Radio" class="headerlink" title="Radio"></a>Radio</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input type=&quot;radio&quot; id=&quot;one&quot; value=&quot;One&quot; v-model=&quot;picked&quot;&gt;</div><div class="line">&lt;input type=&quot;radio&quot; id=&quot;two&quot; value=&quot;Two&quot; v-model=&quot;picked&quot;&gt;</div></pre></td></tr></table></figure>
+<h2 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h2><p>&#x5355;&#x9009;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;select v-model=&quot;selected&quot;&gt;</div><div class="line">	&lt;option selected&gt;A&lt;/option&gt;</div><div class="line">	&lt;option&gt;B&lt;/option&gt;</div><div class="line">	&lt;option&gt;C&lt;/option&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x591A;&#x9009;&#xFF08;&#x7ED1;&#x5B9A;&#x5230;&#x540C;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF09;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;select v-model=&quot;selected&quot; multiple&gt;</div><div class="line">	&lt;option selected&gt;A&lt;/option&gt;</div><div class="line">	&lt;option&gt;B&lt;/option&gt;</div><div class="line">	&lt;option&gt;C&lt;/option&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="&#x7ED1;&#x5B9A;-Value"><a href="#&#x7ED1;&#x5B9A;-Value" class="headerlink" title="&#x7ED1;&#x5B9A; Value"></a>&#x7ED1;&#x5B9A; Value</h1><p><strong>v-model</strong> &#x7ED1;&#x5B9A;&#x7684; value &#x901A;&#x5E38;&#x662F;<strong>&#x9759;&#x6001;&#x5B57;&#x7B26;&#x4E32;</strong>&#xFF08;&#x5BF9;&#x4E8E;&#x52FE;&#x9009;&#x6846;&#x662F;&#x903B;&#x8F91;&#x503C;&#xFF09;<br>&#x8981;&#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;<strong>&#x52A8;&#x6001;&#x5C5E;&#x6027;</strong>&#x7684;&#x8BDD;&#x5E94;&#x8BE5;&#x662F;&#x7528; <strong>v-bind </strong></p>
+<h1 id="&#x53C2;&#x6570;&#x7279;&#x6027;"><a href="#&#x53C2;&#x6570;&#x7279;&#x6027;" class="headerlink" title="&#x53C2;&#x6570;&#x7279;&#x6027;"></a>&#x53C2;&#x6570;&#x7279;&#x6027;</h1><h2 id="lazy"><a href="#lazy" class="headerlink" title="lazy"></a>lazy</h2><p>&#x5728;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;v-model &#x5728; input &#x4E8B;&#x4EF6;&#x4E2D;&#x540C;&#x6B65;&#x8F93;&#x5165;&#x6846;&#x503C;&#x4E0E;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x7279;&#x6027; lazy&#xFF0C;&#x4ECE;&#x800C;&#x6539;&#x5230;&#x5728; change &#x4E8B;&#x4EF6;&#x4E2D;&#x540C;&#x6B65;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input v-model=&quot;msg&quot; lazy&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="number"><a href="#number" class="headerlink" title="number"></a>number</h2><p>&#x5982;&#x679C;&#x60F3;&#x81EA;&#x52A8;&#x5C06;&#x7528;&#x6237;&#x7684;&#x8F93;&#x5165;&#x8F6C;&#x4E3A; Number &#x7C7B;&#x578B;&#xFF08;&#x5982;&#x679C;&#x539F;&#x503C;&#x7684;&#x8F6C;&#x6362;&#x7ED3;&#x679C;&#x4E3A; NaN &#x5219;&#x8FD4;&#x56DE;&#x539F;&#x503C;&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x7279;&#x6027; number&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input v-model=&quot;age&quot; number&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="debounce"><a href="#debounce" class="headerlink" title="debounce"></a>debounce</h2><p>debounce &#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x6700;&#x5C0F;&#x7684;&#x5EF6;&#x65F6;&#xFF0C;&#x5728;&#x6BCF;&#x6B21;&#x6572;&#x51FB;&#x4E4B;&#x540E;&#x5EF6;&#x65F6;&#x540C;&#x6B65;&#x8F93;&#x5165;&#x6846;&#x7684;&#x503C;&#x4E0E;&#x6570;&#x636E;&#x3002;&#x5982;&#x679C;&#x6BCF;&#x6B21;&#x66F4;&#x65B0;&#x90FD;&#x8981;&#x8FDB;&#x884C;&#x9AD8;&#x8017;&#x64CD;&#x4F5C;&#xFF08;&#x4F8B;&#x5982;&#x5728;&#x8F93;&#x5165;&#x63D0;&#x793A;&#x4E2D; Ajax &#x8BF7;&#x6C42;&#xFF09;&#xFF0C;&#x5B83;&#x8F83;&#x4E3A;&#x6709;&#x7528;&#x3002;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input v-model=&quot;msg&quot; debounce=&quot;500&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x6CE8;&#x610F; debounce &#x53C2;&#x6570;&#x4E0D;&#x4F1A;&#x5EF6;&#x8FDF; input &#x4E8B;&#x4EF6;&#xFF1A;&#x5B83;&#x5EF6;&#x8FDF;&#x201C;&#x5199;&#x5165;&#x201D;&#x5E95;&#x5C42;&#x6570;&#x636E;&#x3002;&#x56E0;&#x6B64;&#x5728;&#x4F7F;&#x7528; debounce &#x65F6;&#x5E94;&#x5F53;&#x7528; vm.$watch() &#x54CD;&#x5E94;&#x6570;&#x636E;&#x7684;&#x53D8;&#x5316;&#x3002;&#x82E5;&#x60F3;&#x5EF6;&#x8FDF; DOM &#x4E8B;&#x4EF6;&#xFF0C;&#x5E94;&#x5F53;&#x4F7F;&#x7528; debounce &#x8FC7;&#x6EE4;&#x5668;&#x3002;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          
+            <a href="/tags/MVVM/" rel="tag"># MVVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/01/vue-event-handler/" rel="next" title="Vue学习笔记（八） - 方法与事件处理器">
+                <i class="fa fa-chevron-left"></i> Vue学习笔记（八） - 方法与事件处理器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/03/vue-components/" rel="prev" title="Vue学习笔记（十） - 组件">
+                Vue学习笔记（十） - 组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础用法"><span class="nav-number">1.</span> <span class="nav-text">基础用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Text"><span class="nav-number">1.1.</span> <span class="nav-text">Text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiline-text"><span class="nav-number">1.2.</span> <span class="nav-text">Multiline text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkbox"><span class="nav-number">1.3.</span> <span class="nav-text">Checkbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Radio"><span class="nav-number">1.4.</span> <span class="nav-text">Radio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Select"><span class="nav-number">1.5.</span> <span class="nav-text">Select</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定-Value"><span class="nav-number">2.</span> <span class="nav-text">绑定 Value</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数特性"><span class="nav-number">3.</span> <span class="nav-text">参数特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lazy"><span class="nav-number">3.1.</span> <span class="nav-text">lazy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#number"><span class="nav-number">3.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debounce"><span class="nav-number">3.3.</span> <span class="nav-text">debounce</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

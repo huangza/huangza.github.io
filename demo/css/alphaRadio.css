@@ -1,0 +1,43 @@
+/*
+ * @author: Andre Huang;
+ * 模拟单选框的样式
+ */
+.alphaRadio{
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	text-align: left;
+	cursor: pointer;
+	margin-right: 10px;
+}
+.alphaRadio span,
+.alphaRadio i{
+	display: inline-block;
+	vertical-align: middle;
+}
+.alphaRadio i{
+	width: 12px;
+	height: 12px;
+	border: 2px solid #669;
+	border-radius: 50%;
+	position: relative;
+	top: 2px;
+}
+.alphaRadio span{
+	margin-left: -3px;
+	color: #333;
+}
+.alphaRadio [type="radio"]{
+	display: none;
+}
+.alphaRadio.checked i:after{
+	content: "";
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #669;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+}

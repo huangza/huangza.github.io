@@ -1,0 +1,314 @@
+{
+    "chat": [
+        {
+            "_uid": "0000000000000007",
+            "name": "Fannie",
+            "avatar": "./static/profile/friends/u_0000000000000007/avatar.jpg",
+            "latestWord": "",
+            "latestTime": "17:57",
+            "newMsg": false,
+            "msgCount": 0
+        },
+        {
+            "_uid": "0000000000000015",
+            "name": "漩涡鸣人",
+            "avatar": "./static/profile/friends/u_0000000000000015/avatar.jpg",
+            "latestWord": "笔直向前，说到做到",
+            "latestTime": "17:29",
+            "newMsg": true,
+            "msgCount": 2
+        },
+        {
+            "_uid": "0000000000000008",
+            "name": "旗木卡卡西",
+            "avatar": "./static/profile/friends/u_0000000000000008/avatar.jpg",
+            "latestWord": "遵守忍者世界规则的人我们都叫他废物，然而不懂得珍惜同伴的人，则是废物中的废物",
+            "latestTime": "13:49",
+            "newMsg": true,
+            "msgCount": 0
+        },
+        {
+            "_uid": "0000000000000022",
+            "name": "Dwyane Wade",
+            "avatar": "./static/profile/friends/u_0000000000000022/avatar.jpg",
+            "latestWord": "This is my house",
+            "latestTime": "09:21",
+            "newMsg": true,
+            "msgCount": 123
+        },
+        {
+            "_uid": "0000000000000001",
+            "name": "周杰伦",
+            "avatar": "./static/profile/friends/u_0000000000000001/avatar.jpg",
+            "latestWord": "哎哟，不错喔~",
+            "latestTime": "01:22",
+            "newMsg": false,
+            "msgCount": 0
+        }
+    ],
+    "contact": [
+        {
+            "_uid": "0000000000000001",
+            "name": "周杰伦",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000001/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Z",
+            "gender": 1,
+            "vcid": "vcid2017040717250001",
+            "region": "",
+            "remark": "小公举"
+        },{
+            "_uid": "0000000000000002",
+            "name": "陈奕迅",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000002/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "C",
+            "gender": 1,
+            "vcid": "vcid2017040717250002",
+            "region": "",
+            "remark": "吹神"
+        },{
+            "_uid": "0000000000000003",
+            "name": "林宥嘉",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000003/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "L",
+            "gender": 1,
+            "vcid": "vcid2017040717250003",
+            "region": ""
+        },{
+            "_uid": "0000000000000004",
+            "name": "波风水门",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000004/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "B",
+            "gender": 1,
+            "vcid": "vcid2017040717250004",
+            "region": ""
+        },{
+            "_uid": "0000000000000005",
+            "name": "赤砂之蝎",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000005/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "C",
+            "gender": 1,
+            "vcid": "vcid2017040717250005",
+            "region": ""
+        },{
+            "_uid": "0000000000000006",
+            "name": "春野樱",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000006/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "C",
+            "gender": 0,
+            "vcid": "vcid2017040717250006",
+            "region": ""
+        },{
+            "_uid": "0000000000000023",
+            "name": "迪达拉",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000023/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "D",
+            "gender": 1,
+            "vcid": "vcid2017040717250023",
+            "region": ""
+        },{
+            "_uid": "0000000000000008",
+            "name": "旗木卡卡西",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000008/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Q",
+            "gender": 1,
+            "vcid": "vcid2017040717250008",
+            "region": ""
+        },{
+            "_uid": "0000000000000009",
+            "name": "洛克李",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000009/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "L",
+            "gender": 1,
+            "vcid": "vcid2017040717250009",
+            "region": ""
+        },{
+            "_uid": "0000000000000010",
+            "name": "奈良鹿丸",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000010/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "N",
+            "gender": 1,
+            "vcid": "vcid2017040717250010",
+            "region": ""
+        },{
+            "_uid": "0000000000000011",
+            "name": "佩恩",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000011/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "P",
+            "gender": 1,
+            "vcid": "vcid2017040717250011",
+            "region": ""
+        },{
+            "_uid": "0000000000000012",
+            "name": "日向雏田",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000012/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "R",
+            "gender": 0,
+            "vcid": "vcid2017040717250012",
+            "region": "",
+            "remark": "太子妃"
+        },{
+            "_uid": "0000000000000013",
+            "name": "日向宁次",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000013/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "R",
+            "gender": 1,
+            "vcid": "vcid2017040717250013",
+            "region": ""
+        },{
+            "_uid": "0000000000000014",
+            "name": "我爱罗",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000014/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "W",
+            "gender": 1,
+            "vcid": "vcid2017040717250014",
+            "region": ""
+        },{
+            "_uid": "0000000000000015",
+            "name": "漩涡鸣人",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000015/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "X",
+            "gender": 1,
+            "vcid": "vcid2017040717250015",
+            "region": "",
+            "remark": "太子"
+        },{
+            "_uid": "0000000000000016",
+            "name": "宇智波带土",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000016/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Y",
+            "gender": 1,
+            "vcid": "vcid2017040717250016",
+            "region": ""
+        },{
+            "_uid": "0000000000000017",
+            "name": "宇智波鼬",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000017/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Y",
+            "gender": 1,
+            "vcid": "vcid2017040717250017",
+            "region": "",
+            "remark": "尼桑"
+        },{
+            "_uid": "0000000000000018",
+            "name": "宇智波佐助",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000018/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Y",
+            "gender": 1,
+            "vcid": "vcid2017040717250018",
+            "region": "",
+            "remark": "二助子"
+        },{
+            "_uid": "0000000000000019",
+            "name": "猿飞阿斯玛",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000019/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Y",
+            "gender": 1,
+            "vcid": "vcid2017040717250019",
+            "region": ""
+        },{
+            "_uid": "0000000000000020",
+            "name": "自来也",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000020/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Z",
+            "gender": 1,
+            "vcid": "vcid2017040717250020",
+            "region": "",
+            "remark": "好色仙人"
+        },{
+            "_uid": "0000000000000021",
+            "name": "佐井",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000021/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "Z",
+            "gender": 1,
+            "vcid": "vcid2017040717250021",
+            "region": ""
+        },{
+            "_uid": "0000000000000022",
+            "name": "Dwyane Wade",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000022/avatar.jpg",
+            "intro": "",
+            "hrefTo": "",
+            "category": "D",
+            "gender": 1,
+            "vcid": "vcid2017040717250022",
+            "region": "",
+            "remark": "骚韦"
+        },{
+            "_uid": "0000000000000007",
+            "name": "Fannie",
+            "icon": "",
+            "avatar": "./static/profile/friends/u_0000000000000007/avatar.jpg",
+            "intro": "饭尼同学",
+            "hrefTo": "",
+            "category": "F",
+            "gender": 0,
+            "vcid": "fannie",
+            "region": "",
+            "remark": "懵猪"
+        }
+    ]
+}

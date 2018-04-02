@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,AngularJS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4F7F;&amp;#x7528; AngularJS&amp;#xFF0C;&amp;#x6700;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7279;&amp;#x70B9;&amp;#x4E4B;&amp;#x4E00;&amp;#xFF0C;&amp;#x5C31;&amp;#x662F;&amp;#x5B83;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x4E86;&amp;#x3002; &amp;#x5171;&amp;#x60">
+<meta name="keywords" content="JavaScript,AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 的数据绑定">
+<meta property="og:url" content="http://yoursite.com/2016/03/30/ng-bind-and-double-braces/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="&amp;#x4F7F;&amp;#x7528; AngularJS&amp;#xFF0C;&amp;#x6700;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7279;&amp;#x70B9;&amp;#x4E4B;&amp;#x4E00;&amp;#xFF0C;&amp;#x5C31;&amp;#x662F;&amp;#x5B83;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x4E86;&amp;#x3002; &amp;#x5171;&amp;#x60">
+<meta property="og:updated_time" content="2016-03-29T16:40:06.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 的数据绑定">
+<meta name="twitter:description" content="&amp;#x4F7F;&amp;#x7528; AngularJS&amp;#xFF0C;&amp;#x6700;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7279;&amp;#x70B9;&amp;#x4E4B;&amp;#x4E00;&amp;#xFF0C;&amp;#x5C31;&amp;#x662F;&amp;#x5B83;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x4E86;&amp;#x3002; &amp;#x5171;&amp;#x60">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/03/30/ng-bind-and-double-braces/"/>
+
+
+
+
+
+  <title>AngularJS 的数据绑定 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/ng-bind-and-double-braces/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AngularJS 的数据绑定</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-30T00:29:43+08:00">
+                2016-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4F7F;&#x7528; AngularJS&#xFF0C;&#x6700;&#x91CD;&#x8981;&#x7684;&#x7279;&#x70B9;&#x4E4B;&#x4E00;&#xFF0C;&#x5C31;&#x662F;&#x5B83;&#x7684;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x4E86;&#x3002;</p>
+<h1 id="&#x5171;&#x6027;"><a href="#&#x5171;&#x6027;" class="headerlink" title="&#x5171;&#x6027;"></a>&#x5171;&#x6027;</h1><p>&#x5728; AJS &#x4E2D;&#xFF0C;&#x7ECF;&#x5E38;&#x9700;&#x8981;&#x5C06;&#x7ED9;&#x5B9A;&#x7684;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x6765;&#x6DFB;&#x52A0;&#x5728;&#x67D0;&#x4E2A; html &#x5143;&#x7D20;&#x5185;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x7ECF;&#x5E38;&#x7528;&#x5230;&#x7684;&#x5C31;&#x662F; ng-bind &#x548C;&#x53CC;&#x62EC;&#x53F7;&#xFF08;hexo&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x534A;&#x89D2;&#x7684;&#x82B1;&#x62EC;&#x53F7;&#xFF0C;&#x56E0;&#x6B64;&#x53EA;&#x80FD;&#x7528;&#x4E2D;&#x6587;&#x6216;&#x8005;&#x662F;&#x5168;&#x89D2;&#x7B26;&#x53F7;&#x4E86;&#xFF09;&#x4E86;&#xFF0C;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;div ng-init=&quot;str=&apos;hello&apos;&quot;&gt;</div><div class="line">	&lt;p ng-bind=&quot;str&quot;&gt;&lt;/p&gt;</div><div class="line">	&lt;p&gt;&#xFF5B;&#xFF5B;str&#xFF5D;&#xFF5D;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x4E24;&#x4E2A; p &#x5143;&#x7D20;&#x90FD;&#x80FD;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E0A;&#x663E;&#x793A; str &#x7684;&#x5185;&#x5BB9;&#x3002;&#x8FD9;&#x4E5F;&#x5C31;&#x662F;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<h1 id="&#x4E2A;&#x6027;"><a href="#&#x4E2A;&#x6027;" class="headerlink" title="&#x4E2A;&#x6027;"></a>&#x4E2A;&#x6027;</h1><p>&#x5C3D;&#x7BA1; ng-bind &#x548C;&#x53CC;&#x62EC;&#x53F7;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x4E00;&#x81F4;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x4E24;&#x8005;&#x4ECD;&#x7136;&#x6709;&#x4E00;&#x4E9B;&#x533A;&#x522B;&#x3002;&#x5728;&#x4E24;&#x8005;&#x4E4B;&#x4E2D;&#xFF0C;&#x4E5F;&#x66F4;&#x63A8;&#x8350;&#x4F7F;&#x7528; ng-bind&#x3002;</p>
+<h2 id="&#x53EF;&#x89C1;&#x6027;"><a href="#&#x53EF;&#x89C1;&#x6027;" class="headerlink" title="&#x53EF;&#x89C1;&#x6027;"></a>&#x53EF;&#x89C1;&#x6027;</h2><p>&#x6240;&#x8C13;&#x7684;&#x201C;&#x53EF;&#x89C1;&#x6027;&#x201D;&#xFF0C;&#x5C31;&#x662F;&#x6307;&#xFF0C;&#x5728;&#x6253;&#x5F00;&#x9875;&#x9762;&#x65F6;&#xFF0C;&#x9875;&#x9762;&#x5185;&#x4F1A;&#x5C55;&#x73B0;&#x51FA; AJS &#x7684;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x8868;&#x8FBE;&#x5F0F;&#x3002;<br>&#x8FD9;&#x662F;&#x56E0;&#x4E3A;<strong>&#x6B64;&#x65F6; HTML &#x5185;&#x5BB9;&#x5DF2;&#x7ECF;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x4F46; Angular &#x811A;&#x672C;&#x5C1A;&#x672A;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x56E0;&#x6B64;&#x8FD8;&#x6CA1;&#x6709;&#x66FF;&#x6362;&#x6389; HTML &#x4E2D;&#x7684;&#x53CC;&#x62EC;&#x53F7;&#x6CE8;&#x91CA;</strong>&#x3002;<br>&#x4E8B;&#x5B9E;&#x4E0A;&#x8FD9;&#x4E2A;&#x4E5F;&#x662F;&#x6211;&#x5728;&#x521A;&#x5F00;&#x59CB;&#x5B66;&#x4E60;&#x5F00;&#x53D1; Angular App &#x65F6;&#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;&#x3002;<br>&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; ng-bind &#x6765;&#x89E3;&#x51B3;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x5229;&#x7528;&#x4E86; ng-bind &#x548C;&#x53CC;&#x62EC;&#x53F7;&#x5728;&#x53EF;&#x89C1;&#x6027;&#x7684;&#x533A;&#x522B;&#x3002;<br>&#x4F7F;&#x7528;&#x53CC;&#x62EC;&#x53F7;&#x65F6;&#xFF0C;HTML &#x52A0;&#x8F7D;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;&#x8FD9;&#x4E2A;&#x6CE8;&#x91CA;&#x89C6;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x76F4;&#x63A5;&#x6253;&#x5370;&#x51FA;&#x6765;&#xFF1B;&#x800C;&#x4F7F;&#x7528; ng-bind &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x56E0;&#x4E3A; ng-bind &#x662F;&#x4F5C;&#x4E3A; HTML &#x5143;&#x7D20;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x56E0;&#x6B64;&#x5BF9;&#x4E8E;&#x7528;&#x6237;&#x662F;&#x4E0D;&#x53EF;&#x89C1;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x5C06;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x8868;&#x8FBE;&#x5F0F;&#x66B4;&#x9732;&#x51FA;&#x6765;&#x3002;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// &#x4F7F;&#x7528; ng-bind</div><div class="line">&lt;div ng-bind=&quot;str&quot;&gt;&lt;/div&gt;</div><div class="line">// &#x800C;&#x4E0D;&#x7528; &#xFF5B;&#xFF5B;&#xFF5D;&#xFF5D;</div><div class="line">&lt;div&gt;&#xFF5B;&#xFF5B;str&#xFF5D;&#xFF5D;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>p.s. &#x5BF9;&#x4E8E;&#x8FD9;&#x4E2A;&#x73B0;&#x8C61;&#xFF0C;&#x8FD8;&#x6709;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x5C31;&#x662F;&#x4F7F;&#x7528; ng-cloak&#xFF0C;&#x914D;&#x5408; css &#x7684;&#x5C5E;&#x6027;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5728; Angular &#x811A;&#x672C;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x524D;&#xFF0C;&#x5C06;&#x5E26;&#x6709; ng-cloak &#x6307;&#x4EE4;&#x7684;&#x8282;&#x70B9;&#x9690;&#x85CF;&#x6389;&#xFF0C;&#x5373;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {</div><div class="line">	display: none !important;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7F8E;&#x4E2D;&#x4E0D;&#x8DB3;&#x7684;&#x5728;&#x4E8E;&#xFF0C;angular &#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#xFF0C;&#x6DFB;&#x52A0;&#x4E86;&#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#x7684;&#x5143;&#x7D20;&#x4F1A;&#x5904;&#x4E8E;&#x7A7A;&#x767D;&#x72B6;&#x6001;&#xFF0C;&#x7279;&#x522B;&#x7684;&#xFF0C;&#x52A0;&#x5728; body &#x65F6;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x767D;&#x5C4F;&#x72B6;&#x6001;&#x3002;</p>
+<h2 id="&#x6027;&#x80FD;"><a href="#&#x6027;&#x80FD;" class="headerlink" title="&#x6027;&#x80FD;"></a>&#x6027;&#x80FD;</h2><p>&#x5E76;&#x4E0D;&#x662F;&#x53EA;&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x53CC;&#x62EC;&#x53F7;&#x4F1A;&#x66B4;&#x9732;&#x8868;&#x8FBE;&#x5F0F;&#x5C31;&#x63A8;&#x8350;&#x4F7F;&#x7528; ng-bind &#x7684;&#x3002;&#x66F4;&#x91CD;&#x8981;&#x7684;&#x662F;&#x4E24;&#x8005;&#x5728;&#x6027;&#x80FD;&#x65B9;&#x9762;&#x4E0A;&#x7684;&#x5DEE;&#x5F02;&#x3002;<br>&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x4F7F;&#x7528;&#x53CC;&#x62EC;&#x53F7;&#xFF0C;&#x901F;&#x5EA6;&#x76F8;&#x5BF9;&#x8F83;&#x6162;&#x3002;&#xFF08;&#x8FD9;&#x91CC;&#x662F;&#x6307;&#x6570;&#x636E;&#x8F83;&#x591A;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x4E0B;&#x540C;&#xFF09;<br>&#x9020;&#x6210;&#x6027;&#x80FD;&#x5DEE;&#x5F02;&#x7684;&#x539F;&#x56E0;&#x662F;&#xFF1A;<br>    &#x9996;&#x5148;&#x5BF9;&#x4E8E;&#x53CC;&#x62EC;&#x53F7;&#x6765;&#x8BF4;&#xFF0C;angular &#x4F1A;&#x5728;&#x6BCF;&#x6B21; $digest &#x5FAA;&#x73AF;&#x65F6;&#x5BF9;&#x82B1;&#x62EC;&#x53F7;&#x5185;&#x7684;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x91CD;&#x65B0;&#x8F93;&#x51FA;&#x5230; HTML &#x4E2D;&#xFF1B;<br>    &#x800C;&#x5BF9;&#x4E8E; ng-bind &#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#x6765;&#x8BF4;&#xFF0C;&#x5B83;&#x4F1A;&#x88AB;&#x653E;&#x7F6E;&#x4E00;&#x4E2A; watcher &#x76D1;&#x542C;&#x5668;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x76D1;&#x542C;&#x5668;&#x76D1;&#x542C;&#x5230;&#x5B83;&#x7ED1;&#x5B9A;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;ng-bind &#x624D;&#x4F1A;&#x5E94;&#x7528;&#xFF0C;&#x66F4;&#x65B0;&#x7ED1;&#x5B9A;&#x53D8;&#x91CF;&#x7684;&#x503C;</p>
+<p>&#x5F15;&#x7528; stackoverflow &#x91CC;&#x4E00;&#x4F4D;&#x53EB; Konstantin Krass &#x7684;&#x670B;&#x53CB;&#x7684;&#x5C1D;&#x8BD5;&#xFF1A;</p>
+<blockquote>
+<p>I am currently building a big single page app (~500 bindings per view). Changing from &#xFF5B;&#xFF5B;&#xFF5D;&#xFF5D; to strict ng-bind did save us about 20% in every scope.$digest.</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/27/hide-special-function-in-IE/" rel="next" title="去掉 IE 浏览器在 input 下自带的叉号和小眼睛">
+                <i class="fa fa-chevron-left"></i> 去掉 IE 浏览器在 input 下自带的叉号和小眼睛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/31/create-a-blank-html-page/" rel="prev" title="在 hexo 新建一个不依赖模板配置的空白页面">
+                在 hexo 新建一个不依赖模板配置的空白页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共性"><span class="nav-number">1.</span> <span class="nav-text">共性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#个性"><span class="nav-number">2.</span> <span class="nav-text">个性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可见性"><span class="nav-number">2.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">2.2.</span> <span class="nav-text">性能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

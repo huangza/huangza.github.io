@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,jQuery," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6574;&amp;#x4F53;&amp;#x67B6;&amp;#x6784;&amp;#x65E0;new&amp;#x6784;&amp;#x5EFA;&amp;#x5B9E;&amp;#x4F8B;&amp;#x603B;&amp;#x7ED3;  &amp;#x901A;&amp;#x8FC7; new jQuery.fn.init() &amp;#x6784;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF">
+<meta name="keywords" content="JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习jQuery源码（一）- 整体架构">
+<meta property="og:url" content="http://yoursite.com/2016/10/13/learn-jquery-sourcecode-01-overall-structure/index.html">
+<meta property="og:site_name" content="Andre Huang">
+<meta property="og:description" content="&amp;#x6574;&amp;#x4F53;&amp;#x67B6;&amp;#x6784;&amp;#x65E0;new&amp;#x6784;&amp;#x5EFA;&amp;#x5B9E;&amp;#x4F8B;&amp;#x603B;&amp;#x7ED3;  &amp;#x901A;&amp;#x8FC7; new jQuery.fn.init() &amp;#x6784;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF">
+<meta property="og:image" content="http://yoursite.com/2016/10/13/learn-jquery-sourcecode-01-overall-structure/001%20-%20%E6%97%A0new%E6%9E%84%E5%BB%BA.jpg">
+<meta property="og:updated_time" content="2016-10-13T14:17:20.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习jQuery源码（一）- 整体架构">
+<meta name="twitter:description" content="&amp;#x6574;&amp;#x4F53;&amp;#x67B6;&amp;#x6784;&amp;#x65E0;new&amp;#x6784;&amp;#x5EFA;&amp;#x5B9E;&amp;#x4F8B;&amp;#x603B;&amp;#x7ED3;  &amp;#x901A;&amp;#x8FC7; new jQuery.fn.init() &amp;#x6784;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF">
+<meta name="twitter:image" content="http://yoursite.com/2016/10/13/learn-jquery-sourcecode-01-overall-structure/001%20-%20%E6%97%A0new%E6%9E%84%E5%BB%BA.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/13/learn-jquery-sourcecode-01-overall-structure/"/>
+
+
+
+
+
+  <title>学习jQuery源码（一）- 整体架构 | Andre Huang</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?34d0124ba07f7b664e5564e7636c019b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Andre Huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/13/learn-jquery-sourcecode-01-overall-structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andre Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andre Huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习jQuery源码（一）- 整体架构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-13T22:11:08+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6574;&#x4F53;&#x67B6;&#x6784;"><a href="#&#x6574;&#x4F53;&#x67B6;&#x6784;" class="headerlink" title="&#x6574;&#x4F53;&#x67B6;&#x6784;"></a>&#x6574;&#x4F53;&#x67B6;&#x6784;</h1><h2 id="&#x65E0;new&#x6784;&#x5EFA;&#x5B9E;&#x4F8B;"><a href="#&#x65E0;new&#x6784;&#x5EFA;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x65E0;new&#x6784;&#x5EFA;&#x5B9E;&#x4F8B;"></a>&#x65E0;new&#x6784;&#x5EFA;&#x5B9E;&#x4F8B;</h2><p><strong>&#x603B;&#x7ED3;</strong></p>
+<ul>
+<li>&#x901A;&#x8FC7; new jQuery.fn.init() &#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x62E5;&#x6709; init &#x6784;&#x9020;&#x5668;&#x7684; prototype &#x539F;&#x578B;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;</li>
+<li>&#x901A;&#x8FC7;&#x6539;&#x53D8; prototype &#x6307;&#x9488;&#x7684;&#x6307;&#x5411;&#xFF0C;&#x8BA9;&#x8FD9;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#x4E5F;&#x6307;&#x5411; jQuery &#x5BF9;&#x8C61;&#x7684;&#x539F;&#x578B; prototype</li>
+<li>&#x8FD9;&#x6837;&#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x5BF9;&#x8C61;&#x5C31;&#x7EE7;&#x627F;&#x4E86; jQuery.fn &#x539F;&#x578B;&#x5B9A;&#x4E49;&#x7684;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x4E86;</li>
+</ul>
+<p><strong>&#x539F;&#x7406;&#x56FE;&#x793A;:</strong><br><img src="/2016/10/13/learn-jquery-sourcecode-01-overall-structure/001%20-%20%E6%97%A0new%E6%9E%84%E5%BB%BA.jpg" alt="&#x539F;&#x7406;&#x56FE;&#x793A;"></p>
+<h2 id="&#x94FE;&#x5F0F;&#x8C03;&#x7528;"><a href="#&#x94FE;&#x5F0F;&#x8C03;&#x7528;" class="headerlink" title="&#x94FE;&#x5F0F;&#x8C03;&#x7528;"></a>&#x94FE;&#x5F0F;&#x8C03;&#x7528;</h2><p>&#x5F85;&#x8865;&#x5145;&#x3002;&#x3002;&#x3002;</p>
+<h2 id="&#x63D2;&#x4EF6;&#x63A5;&#x53E3;"><a href="#&#x63D2;&#x4EF6;&#x63A5;&#x53E3;" class="headerlink" title="&#x63D2;&#x4EF6;&#x63A5;&#x53E3;"></a>&#x63D2;&#x4EF6;&#x63A5;&#x53E3;</h2><blockquote>
+<p>jQuery &#x652F;&#x6301;&#x81EA;&#x5DF1;&#x6269;&#x5C55;&#x5C5E;&#x6027;&#xFF0C;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;jQuery.fn.extend() &#x6765;&#x5BF9;&#x5BF9;&#x8C61;&#x589E;&#x52A0;&#x65B9;&#x6CD5;</p>
+</blockquote>
+<p>&#x5728;jQuery&#x4E2D;&#xFF0C;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">jQuery.extend = jQuery.fn.extend = function(){}</div></pre></td></tr></table></figure></p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E24;&#x8005;&#x6307;&#x5411;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x524D;&#x8005;&#x662F;&#x5BF9;<em> jQuery &#x672C;&#x8EAB;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x62D3;&#x5C55;</em>&#xFF1B;&#x540E;&#x8005;&#x662F;&#x5BF9;<em> jQuery.fn&#xFF0C;&#x4E5F;&#x5C31;&#x662F; jQuery &#x7684;&#x539F;&#x578B;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x4E86;&#x62D3;&#x5C55;</em>&#x3002;&#x800C;&#x8FD9;&#x6837;&#x7684;&#x529F;&#x80FD;&#x5C31;&#x662F;&#x901A;&#x8FC7; this &#x6765;&#x5B9E;&#x73B0;&#x3002;<br>&#x6E90;&#x7801;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">jQuery.extend = jQuery.fn.extend = function(){</div><div class="line">    var src, copyIsArray, copy, name, options, clone,</div><div class="line">        target = arguments[0] || {}     // &#x5E38;&#x89C1;&#x7528;&#x6CD5; jQuery.extend( obj1, obj2 )&#xFF0C;&#x6B64;&#x65F6;&#xFF0C;target &#x4E3A; arguments[0]</div><div class="line">        i = 1,</div><div class="line">        length = arguments.length,</div><div class="line">        deep = false;</div><div class="line">    </div><div class="line">    // Handle a deep copy situation</div><div class="line">    if( typeof target === &quot;boolean&quot; ){   // &#x5982;&#x679C;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4E3A; true&#xFF0C;&#x5373; jQuery.extend( true, obj1, obj2 ); &#x7684;&#x60C5;&#x51B5;</div><div class="line">        deep = target;      // &#x6B64;&#x65F6; target &#x4E3A; true</div><div class="line">        target = arguments[1] || {};        // target &#x6539;&#x6210; obj1</div><div class="line">        // skip the boolean and the target</div><div class="line">        i = 2;</div><div class="line">    }</div><div class="line">    </div><div class="line">    // Handle case when target is a string or something (possible in deep copy)</div><div class="line">    if( typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction(target) ){   // &#x5904;&#x7406;&#x5947;&#x602A;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x4F8B;&#x5982; jQuery.extend( &apos;hello&apos;, { nick: &apos;casper&apos; } )</div><div class="line">        target = {};</div><div class="line">    }</div><div class="line">    </div><div class="line">    // extend jQuery itself if only one argument is passed</div><div class="line">    if( length === i ){     // &#x5904;&#x7406;&#x7C7B;&#x4F3C;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;jQuery.extend(obj)&#xFF0C;&#x6216;jQuery.fn.extend(obj)</div><div class="line">        target = this;      // jQuery.extend &#x65F6;&#xFF0C;this &#x6307;&#x7684;&#x662F; jQuery&#xFF1B;jQuery.fn.extend &#x65F6;&#xFF0C;this &#x6307;&#x5411; jQuery.fn</div><div class="line">        --i;</div><div class="line">    }</div><div class="line">    </div><div class="line">    for( ; i &lt; length; i++ ){</div><div class="line">        // Only deal with non-null/undefined values</div><div class="line">        if( (options = argument[i]) != null ){  // &#x6BD4;&#x5982; jQuery.extend( obj1, obj2, obj3, obj4 ), options &#x5219;&#x4E3A; obj2&#x3001;obj3&#x2026;&#x2026;</div><div class="line">            // Extend the base object</div><div class="line">            for( name in options ){</div><div class="line">                src = target[name];</div><div class="line">                copy = options[name];</div><div class="line">                </div><div class="line">                // Prevent never-ending loop</div><div class="line">                if( target === copy ){      // &#x9632;&#x6B62;&#x81EA;&#x5F15;&#x7528;</div><div class="line">                    continue;</div><div class="line">                }</div><div class="line">                </div><div class="line">                // Recurse if we&apos;re merging plain objects or arrays</div><div class="line">                // &#x5982;&#x679C;&#x662F;&#x6DF1;&#x62F7;&#x8D1D;&#xFF0C;&#x4E14;&#x88AB;&#x62F7;&#x8D1D;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x672C;&#x8EAB;&#x662F;&#x4E2A;&#x5BF9;&#x8C61;</div><div class="line">                if( deep &amp;&amp; copy &amp;&amp; (  jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ){</div><div class="line">                    if( copyIsArray ){  // &#x88AB;&#x62F7;&#x8D1D;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x662F;&#x4E2A;&#x6570;&#x7EC4;</div><div class="line">                        copyIsArray = false;</div><div class="line">                        clone = src &amp;&amp; jQuery.isArray(src) ? src : [];</div><div class="line">                    } else {            // &#x88AB;&#x62F7;&#x8D1D;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x662F;&#x4E00;&#x4E2A; plainObject&#xFF0C;&#x6BD4;&#x5982; { nick: &apos;casper&apos; }</div><div class="line">                        clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : {};</div><div class="line">                    }</div><div class="line">                    </div><div class="line">                    // Never move original objects, clone them</div><div class="line">                    target[name] = jQuery.extend( deep, clone, copy );    // &#x9012;&#x5F52;</div><div class="line">                    </div><div class="line">                } else if( copy !== undefined ){    // &#x6D45;&#x62F7;&#x8D1D;&#xFF0C;&#x4E14;&#x5C5E;&#x6027;&#x503C;&#x4E0D;&#x4E3A; undefined</div><div class="line">                    target[name] = copy;</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    // Return the modified object</div><div class="line">    return target;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cnblogs.com/aaronjs/p/3278578.html" target="_blank" rel="external">Aaron - jQuery 2.0.3 &#x6E90;&#x7801;&#x5206;&#x6790;core - &#x6574;&#x4F53;&#x67B6;&#x6784;</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/about-iframe/" rel="next" title="iframe 相关知识的笔记">
+                <i class="fa fa-chevron-left"></i> iframe 相关知识的笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/13/deferred-object/" rel="prev" title="学习 Deferred 对象">
+                学习 Deferred 对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Andre Huang" />
+            
+              <p class="site-author-name" itemprop="name">Andre Huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#整体架构"><span class="nav-number">1.</span> <span class="nav-text">整体架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无new构建实例"><span class="nav-number">1.1.</span> <span class="nav-text">无new构建实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链式调用"><span class="nav-number">1.2.</span> <span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件接口"><span class="nav-number">1.3.</span> <span class="nav-text">插件接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andre Huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
