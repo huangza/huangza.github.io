@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-11T15:30:30.106Z</updated>
+  <updated>2018-04-12T15:58:50.380Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/04/02/note-of-high-performance-javascript/"/>
     <id>http://yoursite.com/2018/04/02/note-of-high-performance-javascript/</id>
     <published>2018-04-02T15:00:53.000Z</published>
-    <updated>2018-04-11T15:30:30.106Z</updated>
+    <updated>2018-04-12T15:58:50.380Z</updated>
     
     <content type="html">&lt;p&gt;&amp;#xFF08;&amp;#x6B64;&amp;#x6587;&amp;#x4E3A;&amp;#x672C;&amp;#x4EBA;&amp;#x5B66;&amp;#x4E60;&amp;#x300A;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;JavaScript&amp;#x300B;&amp;#x7684;&amp;#x8BFB;&amp;#x4E66;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF09;&lt;br&gt;&amp;#xFF08;&amp;#x201D;@&amp;#x201D; &amp;#x5F00;&amp;#x5934;&amp;#x7684;&amp;#x53E5;&amp;#x5B50;&amp;#x4E3A;&amp;#x4E2A;&amp;#x4EBA;&amp;#x8865;&amp;#x5145;&amp;#xFF09;&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -129,6 +129,8 @@
 &lt;li&gt;childNodes &amp;#x5143;&amp;#x7D20;&amp;#x96C6;&amp;#x5408;&lt;/li&gt;
 &lt;li&gt;nextSibling &amp;#x4E0B;&amp;#x4E00;&amp;#x4E2A;&amp;#x76F8;&amp;#x90BB;&amp;#x5143;&amp;#x7D20;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&amp;#x4E24;&amp;#x79CD;&amp;#x65B9;&amp;#x5F0F;&amp;#x90FD;&amp;#x53EF;&amp;#x4EE5;&amp;#x8FDB;&amp;#x884C; DOM &amp;#x7684;&amp;#x904D;&amp;#x5386;&amp;#x3002;&lt;/p&gt;
+&lt;p&gt;&amp;#xFF08;@: &amp;#x81EA;&amp;#x5DF1;&amp;#x6D4B;&amp;#x8BD5;&amp;#x65F6;&amp;#xFF0C;&amp;#x597D;&amp;#x50CF; childNodes &amp;#x6BD4;&amp;#x8F83;&amp;#x5FEB;&amp;#xFF09;&lt;/p&gt;
 </content>
     
     <summary type="html">
