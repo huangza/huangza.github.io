@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-30T09:30:22.353Z</updated>
+  <updated>2018-04-30T17:35:13.611Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/04/02/note-of-high-performance-javascript/"/>
     <id>http://yoursite.com/2018/04/02/note-of-high-performance-javascript/</id>
     <published>2018-04-02T15:00:53.000Z</published>
-    <updated>2018-04-30T09:30:22.353Z</updated>
+    <updated>2018-04-30T17:35:13.611Z</updated>
     
     <content type="html">&lt;p&gt;&amp;#xFF08;&amp;#x6B64;&amp;#x6587;&amp;#x4E3A;&amp;#x672C;&amp;#x4EBA;&amp;#x5B66;&amp;#x4E60;&amp;#x300A;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;JavaScript&amp;#x300B;&amp;#x7684;&amp;#x8BFB;&amp;#x4E66;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF09;&lt;br&gt;&amp;#xFF08;&amp;#x201D;@&amp;#x201D; &amp;#x5F00;&amp;#x5934;&amp;#x7684;&amp;#x53E5;&amp;#x5B50;&amp;#x4E3A;&amp;#x4E2A;&amp;#x4EBA;&amp;#x8865;&amp;#x5145;&amp;#xFF09;&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -241,6 +241,34 @@
 &lt;p&gt;&amp;#x4E0D;&amp;#x8FC7;&amp;#xFF0C;&amp;#x6B63;&amp;#x5982;&amp;#x5728;&amp;#x4E0A;&amp;#x9762;&amp;#x63D0;&amp;#x5230;&amp;#x7684;&amp;#x6F5C;&amp;#x5728;&amp;#x95EE;&amp;#x9898;&amp;#x6240;&amp;#x8FF0;&amp;#xFF0C;&amp;#x4E00;&amp;#x822C;&amp;#x5EFA;&amp;#x8BAE;&amp;#x6539;&amp;#x7528;&amp;#x8FED;&amp;#x4EE3;&amp;#x3001;Memoization&amp;#x3002;&lt;/p&gt;
 &lt;h3 id=&quot;Memoization&quot;&gt;&lt;a href=&quot;#Memoization&quot; class=&quot;headerlink&quot; title=&quot;Memoization&quot;&gt;&lt;/a&gt;Memoization&lt;/h3&gt;&lt;p&gt;&amp;#x8FD9;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x907F;&amp;#x514D;&amp;#x91CD;&amp;#x590D;&amp;#x5DE5;&amp;#x4F5C;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#x2014;&amp;#x2014;&amp;#x5C06;&amp;#x524D;&amp;#x4E00;&amp;#x4E2A;&amp;#x8BA1;&amp;#x7B97;&amp;#x7ED3;&amp;#x679C;&amp;#x7F13;&amp;#x5B58;&amp;#x4E0B;&amp;#x6765;&amp;#x4F9B;&amp;#x540E;&amp;#x7EED;&amp;#x8BA1;&amp;#x7B97;&amp;#x4F7F;&amp;#x7528;&amp;#xFF0C;&amp;#x907F;&amp;#x514D;&amp;#x4E86;&amp;#x91CD;&amp;#x590D;&amp;#x5DE5;&amp;#x4F5C;&amp;#x3002;&lt;/p&gt;
 &lt;p&gt;&amp;#x6BD4;&amp;#x5982;&amp;#xFF0C;&amp;#x5728;&amp;#x6590;&amp;#x6CE2;&amp;#x5217;&amp;#x5951;&amp;#x6570;&amp;#x5217;&amp;#x4E2D;&amp;#xFF0C;&amp;#x7531;&amp;#x4E8E;&amp;#x516C;&amp;#x5F0F; f(n) = f(n-1) + f(n-2)&amp;#xFF0C;&amp;#x6709;&amp;#x5F88;&amp;#x591A;&amp;#x8BA1;&amp;#x7B97;&amp;#x662F;&amp;#x91CD;&amp;#x590D;&amp;#x7684;&amp;#x3002;&lt;br&gt;&amp;#x6BD4;&amp;#x5982;&amp;#x6C42; f(4)&amp;#xFF0C;&amp;#x4F1A;&amp;#x53D8;&amp;#x6210; f(3) + f(2)&amp;#xFF0C;&amp;#x518D;&amp;#x63A8;&amp;#x5012;&amp;#x51FA; f(2) + f(1) + f(2)&amp;#xFF0C;&amp;#x8FD9;&amp;#x91CC;&amp;#x5F00;&amp;#x59CB;&amp;#x5C31;&amp;#x6709;&amp;#x91CD;&amp;#x590D;&amp;#x8BA1;&amp;#x7B97;&amp;#x4E86;&amp;#xFF0C;f(2) &amp;#x5C31;&amp;#x8BA1;&amp;#x7B97;&amp;#x4E86;&amp;#x4E24;&amp;#x6B21;&amp;#x3002;&lt;/p&gt;
+&lt;h1 id=&quot;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;&amp;#x6B63;&amp;#x5219;&amp;#x8868;&amp;#x8FBE;&amp;#x5F0F;&quot;&gt;&lt;a href=&quot;#&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;&amp;#x6B63;&amp;#x5219;&amp;#x8868;&amp;#x8FBE;&amp;#x5F0F;&quot; class=&quot;headerlink&quot; title=&quot;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;&amp;#x6B63;&amp;#x5219;&amp;#x8868;&amp;#x8FBE;&amp;#x5F0F;&quot;&gt;&lt;/a&gt;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;&amp;#x6B63;&amp;#x5219;&amp;#x8868;&amp;#x8FBE;&amp;#x5F0F;&lt;/h1&gt;&lt;h2 id=&quot;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x8FDE;&amp;#x63A5;&quot;&gt;&lt;a href=&quot;#&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x8FDE;&amp;#x63A5;&quot; class=&quot;headerlink&quot; title=&quot;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x8FDE;&amp;#x63A5;&quot;&gt;&lt;/a&gt;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x8FDE;&amp;#x63A5;&lt;/h2&gt;&lt;p&gt;&amp;#x5728;&amp;#x5E73;&amp;#x65F6;&amp;#x5F00;&amp;#x53D1;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6784;&amp;#x5EFA;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x7684;&amp;#x5E38;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;&amp;#xFF1A;&lt;strong&gt;&amp;#x901A;&amp;#x8FC7;&amp;#x4E00;&amp;#x4E2A;&amp;#x5FAA;&amp;#x73AF;&amp;#xFF0C;&amp;#x5411;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x672B;&amp;#x5C3E;&amp;#x4E0D;&amp;#x65AD;&amp;#x5730;&amp;#x6DFB;&amp;#x52A0;&amp;#x5185;&amp;#x5BB9;&lt;/strong&gt;&amp;#x3002;&lt;br&gt;e.g.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var html = &amp;apos;&amp;lt;ul&amp;gt;&amp;apos;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;for(var i = 10; i--;) {&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    html += &amp;apos;&amp;lt;li&amp;gt;No: &amp;apos; + (10 - i) + &amp;apos;&amp;lt;/li&amp;gt;&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;}&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;html += &amp;apos;&amp;lt;/ul&amp;gt;&amp;apos;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#x800C;&amp;#x5BF9;&amp;#x4E8E;&amp;#x4E0A;&amp;#x9762;&amp;#x7684;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF08;&amp;#x5408;&amp;#x5E76;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#xFF09;&amp;#xFF0C;&amp;#x6709;&amp;#x591A;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x53EF;&amp;#x4EE5;&amp;#x5B9E;&amp;#x73B0;&amp;#x3002;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&amp;#x65B9;&amp;#x6CD5;&lt;/th&gt;
+&lt;th&gt;&amp;#x793A;&amp;#x4F8B;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;The + operator&lt;/td&gt;
+&lt;td&gt;str = &amp;#x2018;a&amp;#x2019; + &amp;#x2018;b&amp;#x2019; + &amp;#x2018;c&amp;#x2019;;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The += operator&lt;/td&gt;
+&lt;td&gt;str = &amp;#x2018;a&amp;#x2019;;&lt;br&gt;str += &amp;#x2018;b&amp;#x2019;;&lt;br&gt;str += &amp;#x2018;c&amp;#x2019;;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;array.join()&lt;/td&gt;
+&lt;td&gt;str = [&amp;#x2018;a&amp;#x2019;, &amp;#x2018;b&amp;#x2019;, &amp;#x2018;c&amp;#x2019;].join(&amp;#x2018;&amp;#x2019;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;string.concat()&lt;/td&gt;
+&lt;td&gt;str = &amp;#x2018;a&amp;#x2019;;&lt;br&gt;str = str.concat(&amp;#x2018;b&amp;#x2019;, &amp;#x2018;c&amp;#x2019;);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     
     <summary type="html">
