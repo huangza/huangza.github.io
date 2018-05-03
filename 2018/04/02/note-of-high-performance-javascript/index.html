@@ -107,7 +107,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/02/note-of-high-performance-javascript/index.html">
 <meta property="og:site_name" content="Andre Huang">
 <meta property="og:description" content="&amp;#xFF08;&amp;#x6B64;&amp;#x6587;&amp;#x4E3A;&amp;#x672C;&amp;#x4EBA;&amp;#x5B66;&amp;#x4E60;&amp;#x300A;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;JavaScript&amp;#x300B;&amp;#x7684;&amp;#x8BFB;&amp;#x4E66;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF09;&amp;#xFF08;&amp;#x201D;@&amp;#x201D; &amp;#x5F00;&amp;#x5">
-<meta property="og:updated_time" content="2018-05-01T16:20:35.619Z">
+<meta property="og:updated_time" content="2018-05-03T15:56:28.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《高性能JavaScript》读书笔记">
 <meta name="twitter:description" content="&amp;#xFF08;&amp;#x6B64;&amp;#x6587;&amp;#x4E3A;&amp;#x672C;&amp;#x4EBA;&amp;#x5B66;&amp;#x4E60;&amp;#x300A;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;JavaScript&amp;#x300B;&amp;#x7684;&amp;#x8BFB;&amp;#x4E66;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF09;&amp;#xFF08;&amp;#x201D;@&amp;#x201D; &amp;#x5F00;&amp;#x5">
@@ -577,7 +577,19 @@
 </tr>
 </tbody>
 </table>
-<h2 id="&#x52A0;-&#x548C;&#x52A0;&#x7B49;-&#x64CD;&#x4F5C;&#x7B26;"><a href="#&#x52A0;-&#x548C;&#x52A0;&#x7B49;-&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x52A0;(+)&#x548C;&#x52A0;&#x7B49;(+=)&#x64CD;&#x4F5C;&#x7B26;"></a>&#x52A0;(+)&#x548C;&#x52A0;&#x7B49;(+=)&#x64CD;&#x4F5C;&#x7B26;</h2>
+<h2 id="&#x52A0;-&#x548C;&#x52A0;&#x7B49;-&#x64CD;&#x4F5C;&#x7B26;"><a href="#&#x52A0;-&#x548C;&#x52A0;&#x7B49;-&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x52A0;(+)&#x548C;&#x52A0;&#x7B49;(+=)&#x64CD;&#x4F5C;&#x7B26;"></a>&#x52A0;(+)&#x548C;&#x52A0;&#x7B49;(+=)&#x64CD;&#x4F5C;&#x7B26;</h2><p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x5BFB;&#x627E;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x6765;&#x4F18;&#x5316;&#x3002;&#x4F46;&#x662F;&#x5728;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x4E0A;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x52A0;&#x548C;&#x52A0;&#x7B49;&#x7684;&#x64CD;&#x4F5C;&#x6548;&#x7387;&#x6700;&#x5927;&#x5316;&#x3002;</p>
+<p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">str += &apos;one&apos; + &apos;two&apos;</div></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x8FD9;&#x53E5;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x4F1A;&#x7ECF;&#x5386;&#x56DB;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x8FDE;&#x63A5;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32; &#x2018;onetwo&#x2019; &#x88AB;&#x8D4B;&#x503C;&#x7ED9;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;&#x4E0E; str &#x5F53;&#x524D;&#x7684;&#x503C;&#x8FDE;&#x63A5;</li>
+<li>&#x7ED3;&#x679C;&#x8D4B;&#x503C;&#x7ED9; str</li>
+</ol>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x907F;&#x514D;&#x751F;&#x6210;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x63D0;&#x901F;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">str += &apos;one&apos;;</div><div class="line">str += &apos;two&apos;;</div></pre></td></tr></table></figure></p>
+<p>&#x751A;&#x81F3;&#x8FD9;&#x4E48;&#x505A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">str = str + &apos;one&apos; + &apos;two&apos;;</div></pre></td></tr></table></figure></p>
+<p>&#x4E0A;&#x9762;&#x8FD9;&#x53E5;&#x8D4B;&#x503C;&#x8868;&#x8FBE;&#x5F0F;&#x7531; str &#x5F00;&#x59CB;&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#xFF0C;&#x6BCF;&#x6B21;&#x7ED9;&#x5B83;&#x9644;&#x52A0;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7531;&#x5DE6;&#x5411;&#x53F3;&#x4F9D;&#x6B21;&#x8FDE;&#x63A5;&#x3002;<br>&#xFF08;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x53D8;&#x6362;&#x4E86;&#x987A;&#x5E8F;&#xFF0C;&#x5982; str = &#x2018;one&#x2019; + str + &#x2018;two&#x2019;&#xFF0C;&#x4F18;&#x5316;&#x5C31;&#x4F1A;&#x5931;&#x6548;&#x3002;&#xFF09;</p>
+
       
     </div>
     
